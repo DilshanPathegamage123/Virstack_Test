@@ -1,10 +1,6 @@
-$border-color: #ccc;
-$primary-color: #007bff;
-$background-light: white;
-
 // colours used in the project
 $white: #ffffff;
-$blue: #318dc2;
+$blue: #0056b3;
 $black: #000000;
 $ash: #7c817ff5;
 $border_color: #ccc;
@@ -42,10 +38,6 @@ $table_row_hover_color: #eaeaea;
     outline: none;
     transition: all 0.3s ease;
     height: 35px;
-
-    &:focus {
-      border-color: $blue;
-    }
   }
 
   .clear-icon {
