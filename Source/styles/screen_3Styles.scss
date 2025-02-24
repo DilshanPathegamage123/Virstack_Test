@@ -1,0 +1,56 @@
+// colours used in the project
+$white: #ffffff;
+$blue:#0056b3;
+$black: #000000;
+$ash: #7c817ff5;
+$border_color: #ccc;
+$modal_background: #000000;
+$text_color: #333;
+$table_row_hover_color: #eaeaea;
+$font_size: 14px;
+
+.container {
+  background: $white;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: left;
+
+  #screen_3Title {
+    font-size: $font_size;
+    font-weight: 550;
+  }
+
+  #Check {
+    margin-top: 10px;
+  }
+
+  #JobNo {
+    font-size: $font_size;
+    margin-top: 10px;
+    color: $text_color;
+  }
+
+  #handler {
+    color: $text_color;
+    font-size: $font_size;
+  }
+
+  .radio-container {
+    border: 1px solid $border_color;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+
+      span {
+        color: $text_color;
+        margin-left: 10px;
+        font-size: $font_size;
+      }
+    }
+  }
+}
