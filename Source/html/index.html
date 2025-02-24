@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virstack Test</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body>
+    <!-- Open Modal Button -->
+    <div class="container">
+      <button class="center-btn" id="clickBtn">Open Modal</button>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <Text id="newjob">New Job</Text>
+        </div>
+        <div class="modal-body">
+          <div id="dynamicContent">
+            <!-- Dynamic content will be inserted here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="page-indicator-container">
+            <span class="page-indicator-active" id="page1"></span>
+            <span class="page-indicator" id="page2"></span>
+            <span class="page-indicator" id="page3"></span>
+          </div>
+          <button id="nextBtn">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+  </body>
+</html>
