@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   nextModalBtn = document.getElementById("nextBtn");
   dynamicContent = document.getElementById("dynamicContent");
 
-  // Open modal on click
+  // Open modal click
   openModalBtn?.addEventListener("click", () => {
     if (modal) {
       modal.style.display = "flex";
@@ -53,7 +53,8 @@ function updateDynamicContent() {
       break;
   }
 
-  dynamicContent.innerHTML = "<p>Loading...</p>"; // Show loading message
+  dynamicContent.innerHTML = "<p>Loading...</p>"; 
+
   if (typeof htmlFile === "string" && htmlFile.includes(".html")) {
     fetch(`../html/${htmlFile}`)
       .then((response) => response.text())
@@ -66,7 +67,7 @@ function updateDynamicContent() {
       .catch((error) => {
         console.error("Error loading dynamic content:", error);
         dynamicContent.innerHTML =
-          "<p>Error loading content. Please try again.</p>"; // Show error message
+          "<p>Error loading content. Please try again.</p>"; 
       });
   }
 
@@ -100,7 +101,6 @@ function Screen1() {
     { organization: "Netflix", code: "NFLX", handler: "Isabella" },
     { organization: "Twitter", code: "TWTR", handler: "Mason" },
     { organization: "Snapchat", code: "SNAP", handler: "Olivia" },
-    { organization: "Facebook", code: "FBLK", handler: "Christopher" },
     { organization: "LinkedIn", code: "LNKD", handler: "Benjamin" },
     { organization: "Salesforce", code: "CRM", handler: "Jack" },
     { organization: "Stripe", code: "STRP", handler: "Grace" },
@@ -113,7 +113,8 @@ function Screen1() {
     { organization: "Airbnb", code: "ABNB", handler: "Lucas" },
     { organization: "Slack", code: "WORK", handler: "Amos" },
     { organization: "Zoom", code: "ZM", handler: "Lily" },
-    { organization: "Shopify", code: "SHOP", handler: "Ella" },
+    { organization: "PayPal", code: "PYPL", handler: "Ethan" },
+    { organization: "Square", code: "SQ", handler: "Ava" },
   ];
 
   const rowsPerPage = 5;
