@@ -9,6 +9,8 @@ $text_color: #333;
 $table_row_hover_color: #eaeaea;
 $font_size1: 14px;
 $font_size2: 12px;
+$font_size3: 18px;
+$font_size4: 16px;
 
 .container {
   width: 100%;
@@ -94,7 +96,7 @@ $font_size2: 12px;
         padding: 10px;
 
         label {
-          font-size: 14px;
+          font-size: $font_size1;
 
           .checkbox {
             margin-right: 10px;
@@ -112,8 +114,8 @@ $font_size2: 12px;
 
   #leftTitle,
   #rightTitle {
-    color: $text_color;
-    font-size: 14px;
+    color: $text_color !important;
+    font-size: $font_size1;
     margin-bottom: 10px;
   }
 
@@ -135,13 +137,13 @@ $font_size2: 12px;
 
     th {
       color: $text_color;
-      font-size: 12px;
+      font-size: $font_size2;
       border-bottom: 1px solid $border_color;
     }
 
     td {
-      color: black;
-      font-size: 14px;
+      color: $black;
+      font-size: $font_size1;
     }
 
     .checkbox {

@@ -7,7 +7,10 @@ $border_color: #ccc;
 $modal_background: #000000;
 $text_color: #333;
 $table_row_hover_color: #eaeaea;
-$font_size: 14px;
+$font_size1: 14px;
+$font_size2: 12px;
+$font_size3: 18px;
+$font_size4: 16px;
 
 .container {
   background: $white;
@@ -16,7 +19,7 @@ $font_size: 14px;
   text-align: left;
 
   #screen_3Title {
-    font-size: $font_size;
+    font-size: $font_size1;
     font-weight: 550;
   }
 
@@ -25,14 +28,14 @@ $font_size: 14px;
   }
 
   #JobNo {
-    font-size: $font_size;
+    font-size: $font_size1;
     margin-top: 10px;
     color: $text_color;
   }
 
   #handler {
     color: $text_color;
-    font-size: $font_size;
+    font-size: $font_size1;
   }
 
   .radio-container {
@@ -49,7 +52,7 @@ $font_size: 14px;
       span {
         color: $text_color;
         margin-left: 10px;
-        font-size: $font_size;
+        font-size: $font_size1;
       }
     }
   }

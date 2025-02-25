@@ -6,6 +6,9 @@ $ash: #7c817ff5;
 $border_color: #ccc;
 $modal_background: #000000;
 $text-color: #333;
+$font_size1: 14px;
+$font_size2: 12px;
+$font_size3: 18px;
 
 body,
 html {
@@ -24,7 +27,7 @@ html {
 
 .center-btn {
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: $font_size3;
   background-color: $blue;
   color: $white;
   border: none;
@@ -55,7 +58,7 @@ html {
 
       #newjob {
         margin-left: 5px;
-        font-size: 12px;
+        font-size: $font_size2;
       }
     }
 
