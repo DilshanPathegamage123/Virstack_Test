@@ -53,17 +53,25 @@ function updateDynamicContent() {
       break;
   }
 
-  fetch(`../html/${htmlFile}`)
-    .then((response) => response.text())
-    .then((data) => {
-      dynamicContent.innerHTML = data;
-      if (currentIndex === 0) {
-        Screen1(); // Call Screen1 function after loading screen_1.html
-      }
-    })
-    .catch((error) => {
-      console.error("Error loading dynamic content:", error);
-    });
+  dynamicContent.innerHTML = "<p>Loading...</p>"; // Show loading message
+  if (typeof htmlFile === "string" && htmlFile.includes(".html")) {
+    fetch(`../html/${htmlFile}`)
+      .then((response) => response.text())
+
+      .then((data) => {
+        dynamicContent.innerHTML = data;
+        if (currentIndex === 0) Screen1();
+        else if (currentIndex === 1) displayTemplateContent();
+      })
+      .catch((error) => {
+        console.error("Error loading dynamic content:", error);
+        dynamicContent.innerHTML =
+          "<p>Error loading content. Please try again.</p>"; // Show error message
+      });
+  }
+
+  // update next button text
+  nextBtn.textContent = currentIndex === 2 ? "Create Job" : "Next";
 
   // Update page indicators
   pageIndicators.forEach((indicator, index) => {
@@ -75,7 +83,7 @@ function updateDynamicContent() {
   });
 }
 
-// Screen 1
+////////////////////////// Screen 1
 function Screen1() {
   // Table Data
   const data = [
@@ -121,6 +129,9 @@ function Screen1() {
   const nextBtn = document.getElementById("nextBtn");
   const lastBtn = document.getElementById("lastBtn");
 
+  // Store checked states
+  const checkedRows = {};
+
   // Render table of screen 1 and pagination
   function renderTable(data, page = 1) {
     tableBody.innerHTML = "";
@@ -131,13 +142,24 @@ function Screen1() {
     paginatedData.forEach((item) => {
       const row = document.createElement("div");
       row.classList.add("table-row");
+      const isChecked = checkedRows[item.code] || false; // Restore checked state
       row.innerHTML = `
-        <span><input type="checkbox" class="row-checkbox"></span>
+        <span><input type="checkbox" class="row-checkbox" data-code="${
+          item.code
+        }" ${isChecked ? "checked" : ""}></span>
         <span>${item.organization}</span>
         <span>${item.code}</span>
         <span>${item.handler}</span>
       `;
       tableBody.appendChild(row);
+    });
+
+    //event listeners for checkboxes
+    document.querySelectorAll(".row-checkbox").forEach((checkbox) => {
+      checkbox.addEventListener("change", (event) => {
+        const code = event.target.getAttribute("data-code");
+        checkedRows[code] = event.target.checked; // Save checked state
+      });
     });
 
     pageNo.textContent = `${start + 1}-${Math.min(end, data.length)} of ${
@@ -202,141 +224,27 @@ function Screen1() {
   renderTable(data);
 }
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const pageIndicators = [
-//     document.getElementById("page1"),
-//     document.getElementById("page2"),
-//     document.getElementById("page3"),
-//   ];
+//////////////////////// Screen 2
 
-//   const openModalBtn = document.getElementById("clickBtn");
-//   const modal = document.getElementById("modal");
-//   const nextModalBtn = document.getElementById("nextBtn");
-//   const dynamicContent = document.getElementById("dynamicContent");
+function displayTemplateContent() {
+  const templateDropdown = document.getElementById("templateDropdownMenu");
+  const template1Content = document.getElementById("template1Content");
 
-//   let currentIndex = 0; //Set Current page index to 0 at the begining
+  if (templateDropdown && template1Content) {
+    template1Content.classList.add("hidden-content");
 
-//   // Open model on click
-//   openModalBtn?.addEventListener("click", () => {
-//     if (modal) {
-//       modal.style.display = "flex";
-//       updateDynamicContent();
-//     }
-//   });
+    templateDropdown.addEventListener("change", function () {
+      console.log("Selected value:", this.value);
 
-//   // Next button click
-//   nextModalBtn?.addEventListener("click", () => {
-//     if (currentIndex === 2) {
-//       modal.style.display = "none";
-//       location.reload();
-//     } else {
-//       currentIndex = (currentIndex + 1) % 3;
-//       updateDynamicContent();
-//     }
-//   });
-
-//   // Update dynamic content
-//   function updateDynamicContent() {
-//     let htmlFile = "";
-//     switch (currentIndex) {
-//       case 0:
-//         htmlFile = "screen_1.html";
-//         break;
-//       case 1:
-//         htmlFile = "screen_2.html";
-//         break;
-//       case 2:
-//         htmlFile = "screen_3.html";
-//         break;
-//     }
-
-//     fetch(`../html/${htmlFile}`)
-//       .then((response) => response.text())
-//       .then((data) => {
-//         dynamicContent.innerHTML = data;
-//         if (currentIndex === 0) {
-//           Screen1(); // Call Screen1 function after loading screen_1.html
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Error loading dynamic content:", error);
-//       });
-
-//     // Update page indicators
-//     pageIndicators.forEach((indicator, index) => {
-//       if (index === currentIndex) {
-//         indicator.classList.add("page-indicator-active");
-//       } else {
-//         indicator.classList.remove("page-indicator-active");
-//       }
-//     });
-//   }
-
-//   //Screen 1
-//   function Screen1() {
-//     // Table Data
-//     const data = [
-//       { organization: "Facebook", code: "FBLK", handler: "Christopher" },
-//       { organization: "Google", code: "GOGL", handler: "Amelia" },
-//       { organization: "Microsoft", code: "MSFT", handler: "James" },
-//       { organization: "Apple", code: "APPL", handler: "Sophia" },
-//       { organization: "Amazon", code: "AMZN", handler: "Ethan" },
-//       { organization: "Netflix", code: "NFLX", handler: "Isabella" },
-//       { organization: "Twitter", code: "TWTR", handler: "Mason" },
-//       { organization: "Snapchat", code: "SNAP", handler: "Olivia" },
-//       { organization: "LinkedIn", code: "LNKD", handler: "Benjamin" },
-//       { organization: "Spotify", code: "SPTF", handler: "Emma" },
-//       { organization: "IBM", code: "IBM", handler: "Oliver" },
-//       { organization: "Adobe", code: "ADBE", handler: "Charlotte" },
-//       { organization: "Tesla", code: "TSLA", handler: "Liam" },
-//       { organization: "Uber", code: "UBER", handler: "Mia" },
-//       { organization: "Airbnb", code: "ABNB", handler: "Lucas" },
-//       { organization: "Slack", code: "WORK", handler: "Amos" },
-//       { organization: "Zoom", code: "ZM", handler: "Lily" },
-//       { organization: "Salesforce", code: "CRM", handler: "Jack" },
-//       { organization: "Stripe", code: "STRP", handler: "Grace" },
-//       { organization: "Pinterest", code: "PINS", handler: "Henry" },
-//       { organization: "Shopify", code: "SHOP", handler: "Ella" },
-//     ];
-
-//     const tableBody = document.getElementById("tableBody");
-//     const keywordInput = document.getElementById("keyword");
-//     const clearBtn = document.getElementById("clearBtn");
-
-//     function renderTable(data) {
-//       tableBody.innerHTML = "";
-//       data.forEach((item) => {
-//         const row = document.createElement("div");
-//         row.classList.add("table-row");
-//         row.innerHTML = `
-//         <span></span>
-//         <span>${item.organization}</span>
-//         <span>${item.code}</span>
-//         <span>${item.handler}</span>
-//       `;
-//         tableBody.appendChild(row);
-//       });
-//     }
-
-//     // Search according to keyword
-//     function filterData(keyword) {
-//       return data.filter((item) =>
-//         item.organization.toLowerCase().includes(keyword.toLowerCase())
-//       );
-//     }
-
-//     keywordInput.addEventListener("input", () => {
-//       const keyword = keywordInput.value;
-//       const filteredData = filterData(keyword);
-//       renderTable(filteredData);
-//     });
-
-//     clearBtn.addEventListener("click", () => {
-//       keywordInput.value = "";
-//       renderTable(data);
-//     });
-
-//     // Initial render
-//     renderTable(data);
-//   }
-// });
+      if (this.value === "temp1") {
+        template1Content.classList.remove("hidden-content");
+        template1Content.classList.add("visible-div");
+      } else {
+        template1Content.classList.add("hidden-content");
+        template1Content.classList.remove("visible-div");
+      }
+    });
+  } else {
+    console.error("Dropdown or template1content not found.");
+  }
+}
